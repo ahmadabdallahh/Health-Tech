@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthTech - Test Results</title>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #24a1d7;
+            color: white;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        .x-ray {
+            text-align: center;
+        }
+
+        .x-ray img {
+            width: 400px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Patient Test Results</h2>
+
+    <!-- جدول نتائج تحليل الدم -->
+    <table>
+        <thead>
+            <tr>
+                <th>Test Name</th>
+                <th>Result</th>
+                <th>Normal Range</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hemoglobin (Hb)</td>
+                <td>14.8 g/dL</td>
+                <td>13.5-17.5 g/dL</td>
+            </tr>
+            <tr>
+                <td>White Blood Cells (WBC)</td>
+                <td>7,000 /µL</td>
+                <td>4,500-11,000 /µL</td>
+            </tr>
+            <tr>
+                <td>Platelets</td>
+                <td>220,000 /µL</td>
+                <td>150,000-450,000 /µL</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- قسم الأشعة -->
+    <div class="x-ray">
+        <h3>X-Ray Results</h3>
+        <img src="images/اشعه.jpeg" alt="X-Ray Image">
+    </div>
+
+</body>
+</html>

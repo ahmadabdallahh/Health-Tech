@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    min-width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff20;
+    padding: 20px;
+    height: 90px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+.logo {
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin: 0 10px 0 17px;
+    transition: 0.5s ease all;
+}
+
+.logo img:hover {
+    transform: scale(1.2);
+}
+
+header .logo h2 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+    margin: 0 0 0 50px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+nav ul .home {
+    background-color: #24a1d7;
+    height: 28px;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    padding: 0 0 10px 0;
+    border-bottom: 2px solid #0056b3;
+}
+
+.login-btn {
+    width: 150px;
+}
+
+.get-started {
+    background-image: linear-gradient(to right , #24a1d7 , #167bc3);
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.5s ease all;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0 30px 0 0 ;
+    cursor: pointer;
+}
+
+.get-started:hover {
+    transform: scale(1.1);
+}
+
+main {
+    display: flex;
+    height: 86vh;
+    min-width: 100%;
+    background-image: url(images/background-home-test.png);
+}
+
+.hero {
+    margin: -30px 0 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* flex-flow: wrap row; */
+}
+
+.hero-content {
+    width: 60%;
+    background-color: #3583a7cd;
+    border-radius: 25px;
+    height: 400px;
+    padding: 10px 0 0 60px;
+}
+
+.hero-content h2 {
+    font-size: 4rem;
+    color: #fff;
+    margin: 0 0 25px 0 ;
+    font-weight: 600;
+    line-height: 80px;
+    width: 100%;
+}
+
+.hero-content p {
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: #fff;
+    font-weight: 600;
+    line-height: 45px;
+}
+
+.hero-image img {
+    height: 560px;
+    margin: 0 20px 0 0;
+    z-index: 1;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    pointer-events: none;
+}
+
+nav ul .home a {
+    color: #fff;
+}
+
+
+/* Styles for the overlay */
+.overlay {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: black;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #00000055;
+    z-index: 1000;
+}
+
+.overlay-content {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    background-color: #4c7daf;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close-btn {
+    background-color: #ff5e5e;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.close-btn:hover {
+    background-color: #ff3b3b;
+}
+/* قواعد التصميم الافتراضية (Desktop) هنا */
+
+@media (max-width: 768px) {
+    /* تصغير حجم الخطوط والعناصر على الشاشات الصغيرة */
+
+    header {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+    }
+
+    .logo {
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+
+    .get-started {
+        font-size: 16px;
+        padding: 8px 15px;
+        margin: 10px 0;
+    }
+
+    main {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        background-image: none; /* أو استبدلها بصورة أصغر أو لون */
+    }
+
+    .hero-content {
+        width: 100%;
+        margin-top: 40px;
+        
+        padding: 20px;
+        height: auto;
+        text-align: center;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5rem;
+        line-height: 50px;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+        line-height: 30px;
+    }
+
+    .hero-image img {
+        position: static;
+        width: 100%;
+        height: 0px;
+        margin: 20px 0;
+    }
+
+    /* العناصر الأخرى */
+    .overlay {
+        width: 90%;
+        top: 50px;
+        right: 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* قواعد خاصة للشاشات الصغيرة جدًا */
+
+    header {
+        padding: 10px;
+    }
+
+    nav ul {
+        font-size: 14px;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .get-started {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .overlay-content {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}

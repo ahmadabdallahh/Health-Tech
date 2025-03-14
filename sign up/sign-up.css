@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Quicksand", sans-serif;
+	scroll-behavior: smooth;
+}
+
+body {
+    background-color: #eeeeee43;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff20;
+    padding: 20px;
+    height: 90px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.logo {
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin: 0 10px 0 17px;
+    transition: 0.5s ease all;
+}
+
+.logo img:hover {
+    transform: scale(1.2);
+}
+
+header .logo h2 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+    margin: 0 0 0 50px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+nav ul li a:hover {
+    padding: 0 0 10px 0;
+    border-bottom: 2px solid #0056b3;
+    color: #0056b3;
+}
+
+.login-btn {
+    width: 150px;
+}
+
+.get-started {
+    background-image: linear-gradient(to right , #24a1d7 , #167bc3);
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 13px;
+    transition: 0.5s ease all;
+    font-weight: 550;
+    font-size: 20px;
+    margin: 0 20px 0 0;
+    font-size: 26px;
+}
+
+.get-started:hover {
+    transform: scale(1.1);
+}
+
+.container {
+    margin: 0 0 0 30px;
+    display: flex;
+    align-items: center;
+}
+
+.content {
+    width: 600px;
+    height: 100%;
+}
+
+.cont-text {
+	margin: 60px 0 0 50px;
+}
+
+.cont-text h2 {
+	font-size: 45px;
+}
+
+.cont-text h5 {
+	margin: 20px 0 0 10px;
+	font-size: 15px;
+}
+
+form {
+	margin: 30px 0 0 50px;
+}
+
+form .email input, form .pass input , form .phone input ,
+form .fr-name input , form .ls-name input , form .national-id input {
+	width: 350px;
+	height: 60px;
+	border-radius: 20px;
+	border: 1px solid #333;
+	padding: 15px;
+	color: #333;
+}
+
+
+form .email , form .pass , form .phone , form .ls-name , form .fr-name , form .national-id{
+	margin: 0 0 15px 0 ;
+}
+
+.cont-for {
+	display: flex;
+	gap: 30px;
+	margin: 20px 0 0 0;
+    font-size: 15px;
+}
+
+.cont-for .keep-log input{
+	padding: 0 15px 0 0;
+}
+
+.log-in input {
+	margin: 20px 0 0 0;
+	width: 350px;
+	height: 50px;
+	border-radius: 15px;
+	background-color: #00AAED;
+	border: none;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	color:#fefeef;
+    cursor: pointer;
+}
+
+.doctor-img img {
+    position: absolute;
+    top: 340px;
+    right: 140px;
+	height: 350px;
+}
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+    }
+
+    .logo {
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+
+    .get-started {
+        font-size: 16px;
+        padding: 8px 15px;
+        margin: 10px 0;
+    }
+
+    main {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        background-image: none; /* أو استبدلها بصورة أصغر أو لون */
+    }
+
+    .hero-content {
+        width: 100%;
+        margin-top: 40px;
+        
+        padding: 20px;
+        height: auto;
+        text-align: center;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5rem;
+        line-height: 50px;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+        line-height: 30px;
+    }
+
+    .hero-image img {
+        position: static;
+        width: 100%;
+        height: 0px;
+        margin: 20px 0;
+    }
+
+}

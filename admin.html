@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المدير</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            margin: 20px;
+        }
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f1f1f1;
+        }
+        .form-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .form-container button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin</h1>
+    </header>
+    <div class="container">
+        <div>
+            <label for="table-select">اختر الجدول:</label>
+            <select id="table-select">
+                <option value="diseases">الأمراض</option>
+                <option value="doctors">الأطباء</option>
+                <option value="hospitals">المستشفيات</option>
+            </select>
+            <button onclick="loadTable()">عرض الجدول</button>
+        </div>
+        <div class="table-container" id="table-container">
+            <!-- سيتم عرض الجدول هنا -->
+        </div>
+        <div class="form-container" id="form-container">
+            <!-- سيتم عرض النموذج هنا -->
+        </div>
+    </div>
+    <script>
+        async function loadTable() {
+            const tableSelect = document.getElementById('table-select').value;
+            const tableContainer = document.getElementById('table-container');
+            const formContainer = document.getElementById('form-container');
+    
+            formContainer.innerHTML = ''; // مسح الفورم الحالي
+            const response = await fetch(`admin.php?action=fetch&table=${tableSelect}`);
+            const data = await response.json();
+    
+            tableContainer.innerHTML = ''; // مسح الجدول الحالي
+    
+            if (data.length > 0) {
+                let tableHTML = '<table><thead><tr>';
+                for (const key in data[0]) {
+                    tableHTML += `<th>${key}</th>`;
+                }
+                tableHTML += '<th>الإجراءات</th></tr></thead><tbody>';
+                data.forEach(row => {
+                    tableHTML += '<tr>';
+                    for (const key in row) {
+                        tableHTML += `<td>${row[key]}</td>`;
+                    }
+                    tableHTML += `
+                        <td>
+                            <button onclick="editRecord('${tableSelect}', ${row.id})">تعديل</button>
+                            <button onclick="deleteRecord('${tableSelect}', ${row.id})">حذف</button>
+                        </td>
+                    </tr>`;
+                });
+                tableHTML += '</tbody></table>';
+                tableContainer.innerHTML = tableHTML;
+                tableContainer.innerHTML += `<button onclick="showAddForm('${tableSelect}')">إضافة صف</button>`;
+            } else {
+                tableContainer.innerHTML = '<p>لا توجد بيانات لعرضها.</p>';
+            }
+        }
+    
+        async function editRecord(table, id) {
+            const formContainer = document.getElementById('form-container');
+            const response = await fetch(`admin.php?action=get&table=${table}&id=${id}`);
+            const data = await response.json();
+    
+            formContainer.innerHTML = ''; // مسح الفورم الحالي
+    
+            let formHTML = `<h3>تعديل السجل</h3><form onsubmit="saveRecord('${table}', ${id}); return false;">`;
+            for (const key in data) {
+                formHTML += `
+                    <label for="${key}">${key}:</label>
+                    <input type="text" id="${key}" name="${key}" value="${data[key]}" required>
+                `;
+            }
+            formHTML += '<button type="submit">حفظ</button></form>';
+            formContainer.innerHTML = formHTML;
+            formContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    
+        async function saveRecord(table, id) {
+            const formData = new FormData(document.querySelector('#form-container form'));
+            formData.append('id', id);
+            const response = await fetch(`admin.php?action=update&table=${table}`, {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            alert(result.success || result.error);
+            loadTable(); // تحديث الجدول بعد التعديل
+        }
+    
+        async function deleteRecord(table, id) {
+            if (confirm('هل أنت متأكد من الحذف؟')) {
+                const response = await fetch(`admin.php?action=delete&table=${table}&id=${id}`);
+                const result = await response.json();
+                alert(result.success || result.error);
+                loadTable(); // تحديث الجدول بعد الحذف
+            }
+        }
+    
+        async function showAddForm(table) {
+            const formContainer = document.getElementById('form-container');
+            formContainer.innerHTML = `<h3>إضافة صف</h3><form onsubmit="addRecord('${table}'); return false;">
+                <div id="dynamic-form-fields"></div>
+                <button type="submit">إضافة</button>
+            </form>`;
+            const response = await fetch(`admin.php?action=getColumns&table=${table}`);
+            const columns = await response.json();
+    
+            const fieldsDiv = document.getElementById('dynamic-form-fields');
+            columns.forEach(column => {
+                fieldsDiv.innerHTML += `
+                    <label for="${column}">${column}:</label>
+                    <input type="text" id="${column}" name="${column}" required>
+                `;
+            });
+        }
+    
+        async function addRecord(table) {
+            const formData = new FormData(document.querySelector('#form-container form'));
+            const response = await fetch(`admin.php?action=add&table=${table}`, {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            alert(result.success || result.error);
+            loadTable(); // تحديث الجدول بعد الإضافة
+        }
+    </script>
+    
+</body>
+</html>

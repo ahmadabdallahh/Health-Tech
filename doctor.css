@@ -1,0 +1,54 @@
+/* إعدادات عامة للجسم */
+body {
+    font-family: Arial, sans-serif; /* نوع الخط */
+    background-color: #b4d6ff; /* لون خلفية الصفحة */
+    margin: 0; /* إلغاء الهوامش */
+    padding: 20px; /* إضافة هوامش داخلية */
+}
+
+/* عنوان الصفحة */
+h2 {
+    color: #35424a; /* لون العنوان */
+    text-align: center; /* محاذاة العنوان إلى المركز */
+    margin-bottom: 20px; /* إضافة هوامش أسفل العنوان */
+    font-size: 30px;
+}
+
+
+/* تنسيق قائمة المواعيد */
+.appointments {
+    max-width: 800px; /* الحد الأقصى لعرض القائمة */
+    margin: 0 auto; /* توسيط القائمة */
+    padding: 20px; /* إضافة هوامش داخلية */
+    background-color: #16222db3; /* لون خلفية القائمة */
+    border-radius: 8px; /* زوايا دائرية */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* إضافة ظل */
+}
+
+/* تنسيق كل موعد */
+.appointment {
+    border: 1px solid #e1e1e1; /* حدود خفيفة حول كل موعد */
+    padding: 15px; /* إضافة هوامش داخلية */
+    margin-bottom: 15px; /* إضافة هوامش أسفل كل موعد */
+    border-radius: 5px; /* زوايا دائرية */
+    background-color: #b4d6ff; /* لون خلفية الموعد */
+    transition: transform 0.2s; /* تأثير انسيابي للتغيير */
+}
+
+/* تنسيق النص داخل المواعيد */
+.appointment p {
+    margin: 5px 0; /* هوامش عمودية للنص */
+}
+
+/* إضافة تأثير تفاعلي عند التمرير */
+.appointment:hover {
+    background-color: #e9ecef; /* تغيير لون الخلفية عند التمرير */
+    transform: scale(1.02); /* تكبير طفيف عند التمرير */
+    transition: background-color 0.3s, transform 0.3s; /* تأثير انسيابي للتغيير */
+}
+
+/* رسالة عدم وجود مواعيد */
+.appointments p {
+    text-align: center; /* محاذاة الرسالة إلى المركز */
+    color: #777; /* لون النص */
+}

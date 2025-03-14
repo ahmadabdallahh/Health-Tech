@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tech</title>
+    <link rel="stylesheet" href="sign-up.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Terms Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 70%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .modal-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .accept-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .decline-btn {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/logo.png" alt="HealthTech Logo">
+            <h2>HealthTech</h2>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="../appointment.php">Appointment</a></li>
+                <li><a href="../result.php">Results</a></li>
+                <li><a href="../EduCare.php">EduCare</a></li>
+                <li><a href="../Hospitally.php">Hospitally</a></li>
+                <li><a href="../forum.php">Forum</a></li> 
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </nav>
+        <a href="sign-up.html" class="get-started">Sign Up</a>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <div class="cont-text">
+                <h2>Track Your Health Condition & More!</h2>
+                <h5>Start your health care journey today.</h5>
+            </div>
+
+            <form id="signUpForm">
+                <div class="fr-name">
+                    <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+                </div>
+
+                <div class="ls-name">
+                    <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+                </div>
+                
+                <div class="email">
+                    <input type="text" name="national_id" id="national_id" placeholder="National ID" maxlength="14" minlength="14" required>
+                    <span id="national_id_error" class="error-message"></span>
+                </div>
+
+                <div class="phone">
+                    <input type="tel" name="phone_number" id="phone_number" placeholder="Phone Number" required>
+                </div>
+
+                <div class="email">
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <span id="email_error" class="error-message"></span>
+                </div>
+
+                <div class="pass">
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                </div>
+
+                <div class="cont-for">
+                    <div class="keep-log">
+                        <input type="checkbox" name="notifications" id="keep">
+                        <label for="keep">Send me email notifications for my next appointment</label>
+                    </div>
+                </div>
+                <div class="log-in">
+                    <input type="submit" value="Create account">
+                </div>
+            </form>
+            <div class="doctor-img">
+                <img src="../images/doctor-sign_up.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- [Previous header and container content remains the same] -->
+
+    <!-- Terms and Conditions Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <h2>Terms and Conditions</h2>
+            <div class="terms-text">
+                <p>Welcome to HealthTech. By using our service, you agree to the following terms:</p>
+                <ol>
+                    <li>Your personal information will be handled according to our privacy policy</li>
+                    <li>You must provide accurate and truthful information</li>
+                    <li>You are responsible for maintaining the confidentiality of your account</li>
+                    <li>Medical advice provided through our platform is not a substitute for in-person medical consultation</li>
+                    <li>We reserve the right to modify or terminate services at any time</li>
+                </ol>
+            </div>
+            <div class="modal-buttons">
+                <button class="accept-btn" onclick="acceptTerms()">Accept</button>
+                <button class="decline-btn" onclick="declineTerms()">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signUpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('termsModal').style.display = 'block';
+        });
+
+        function acceptTerms() {
+            const formData = new FormData(document.getElementById('signUpForm'));
+            
+            fetch('../register.php?action=save', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    if (data.error.includes("email")) {
+                        document.getElementById('email_error').textContent = data.error;
+                    } else if (data.error.includes("national ID")) {
+                        document.getElementById('national_id_error').textContent = data.error;
+                    }
+                } else {
+                    alert(data.success);
+                    window.location.href = "../index.php";
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        }
+
+        function declineTerms() {
+            document.getElementById('termsModal').style.display = 'none';
+            alert('You must accept the terms and conditions to create an account.');
+        }
+    </script>
+</body>
+</html>
